@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pl.kfrak.removal2app.AddFragment.AddItemFragment">
+
+   <EditText
+       android:id="@+id/add_fragment_item_name"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Name"/>
+
+    <EditText
+        android:id="@+id/add_fragment_item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/add_fragment_item_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE"/>
+</LinearLayout>
