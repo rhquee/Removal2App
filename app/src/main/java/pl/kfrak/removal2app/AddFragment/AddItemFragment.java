@@ -31,6 +31,10 @@ public class AddItemFragment extends DialogFragment implements AddItemContract.V
         // Required empty public constructor
     }
 
+    public static AddItemFragment newInstance(){
+        return new AddItemFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_item, container, false);

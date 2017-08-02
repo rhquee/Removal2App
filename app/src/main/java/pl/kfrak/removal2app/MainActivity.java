@@ -1,14 +1,21 @@
 package pl.kfrak.removal2app;
 
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import pl.kfrak.removal2app.AddFragment.AddItemFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View3 {
+
+    private MainContract.Presenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +52,24 @@ public class MainActivity extends AppCompatActivity {
         //RZECZY W PIWNICY
         //cd. onCreate'a:
         ButterKnife.bind(this);
+
+        mainPresenter = new MainPresenter(this); //this, tj cos co implementuje interfejs view3
+    }
+
+    @OnClick(R.id.main_activity_fab)
+    public void onFabPressed(){
+        //pod wzgllędem MVP dziala to tak, ze:
+        //user kliknie
+        //powiadamiamy presenter "kliknięto przyscisk"
+        //presenter otwiera w naszym activity dialog
+        mainPresenter.onOpenDialogPressed();
+
+    }
+
+    @Override
+    public void openAddDialog() {
+        //razem z AddItemFragment > newInstance
+        //istnieje metoda która otwiera dialog
+        AddItemFragment.newInstance().show(getSupportFragmentManager(), "");
     }
 }

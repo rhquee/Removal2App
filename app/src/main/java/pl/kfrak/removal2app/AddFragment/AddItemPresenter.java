@@ -30,12 +30,17 @@ public class AddItemPresenter implements AddItemContract.Presenter {
 
     private void saveItemToRealm(Realm realm, final Item item) {
         //wykonanie transakcji zapisania itemu do BD
+
         //implementacja anonimowa (new Realm.Transaction)
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.copyToRealm(item);
-            }
-        });
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+        //execyute z parametrem innerRealm
+//            public void execute(Realm innerRealm) {
+//                innerRealm.copyToRealm(item);
+//            }
+//        });
+
+        //innerRealm to nie jest realm z parametru
+        realm.executeTransaction(innerRealm -> innerRealm.copyToRealm(item));
     }
 }

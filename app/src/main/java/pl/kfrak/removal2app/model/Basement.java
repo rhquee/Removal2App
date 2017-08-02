@@ -14,7 +14,6 @@ import io.realm.annotations.Required;
 public class Basement extends RealmObject {
 
     @PrimaryKey
-    @Required
     private int id;
 
     private RealmList<Item> items;

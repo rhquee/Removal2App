@@ -11,7 +11,6 @@ import io.realm.annotations.Required;
 public class Item extends RealmObject {
 
     @PrimaryKey
-    @Required
     private int id;
 
     private String name;
