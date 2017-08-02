@@ -3,6 +3,8 @@ package pl.kfrak.removal2app.AddFragment;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 import pl.kfrak.removal2app.model.Item;
 
 /**
@@ -23,10 +25,29 @@ public class AddItemPresenter implements AddItemContract.Presenter {
         String name = view.getItemName();
         String description = view.getItemDescription();
 
-        //nowy obiekt
-        final Item item = new Item(-1, name, description, new Date().getTime());
+        //tworzy nowy obiekt
+        final Item item = new Item(generateIt(realm), name, description, new Date().getTime()); //generator id
         saveItemToRealm(realm, item);
     }
+
+
+    private int generateIt(Realm realm) {
+        //generowanie unikalne id dla nowego itemu w bd
+        //0. jesli bd nie jest pusta
+
+//        Item itemMaxId = realm.where(Item.class).findFirst(); //findFirst zwraca obiekt/element
+        Number maxNumber = realm.where(Item.class).max("id");
+        //if (maxNumber != null) {
+        //1. znalezx najwyzsze id w bd
+        //int maxId = realm.where(Item.class).max("id").intValue(); //zwraca number, my chcemy intValue
+
+//            return maxNumber.intValue() + 1;
+//        } else {
+//            return Integer.MIN_VALUE; //czemu minvalue?
+//        }
+        return maxNumber != null ? maxNumber.intValue() + 1 : Integer.MIN_VALUE;
+    }
+
 
     private void saveItemToRealm(Realm realm, final Item item) {
         //wykonanie transakcji zapisania itemu do BD

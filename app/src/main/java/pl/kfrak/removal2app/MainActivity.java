@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +17,9 @@ import pl.kfrak.removal2app.AddFragment.AddItemFragment;
 public class MainActivity extends AppCompatActivity implements MainContract.View3 {
 
     private MainContract.Presenter mainPresenter;
+
+//    @BindView(R.id.main_activity_fab)
+//    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +58,29 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         ButterKnife.bind(this);
 
         mainPresenter = new MainPresenter(this); //this, tj cos co implementuje interfejs view3
+
+        FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.main_activity_fab);
+
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mainPresenter.onOpenDialogPressed();
+//            }
+//        });
+
+        floatingActionButton.setOnClickListener(v -> mainPresenter.onOpenDialogPressed());
+
     }
 
-    @OnClick(R.id.main_activity_fab)
-    public void onFabPressed(){
-        //pod wzgllędem MVP dziala to tak, ze:
-        //user kliknie
-        //powiadamiamy presenter "kliknięto przyscisk"
-        //presenter otwiera w naszym activity dialog
-        mainPresenter.onOpenDialogPressed();
-
-    }
+//    @OnClick(R.id.main_activity_fab)
+//    public void onFabPressed(){
+//        //pod wzgllędem MVP dziala to tak, ze:
+//        //user kliknie
+//        //powiadamiamy presenter "kliknięto przyscisk"
+//        //presenter otwiera w naszym activity dialog
+//        mainPresenter.onOpenDialogPressed();
+//
+//    }
 
     @Override
     public void openAddDialog() {
