@@ -28,6 +28,7 @@ public class AddItemPresenter implements AddItemContract.Presenter {
         //tworzy nowy obiekt
         final Item item = new Item(generateIt(realm), name, description, new Date().getTime()); //generator id
         saveItemToRealm(realm, item);
+        view.closeDialog();
     }
 
 

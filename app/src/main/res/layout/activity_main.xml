@@ -4,14 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     tools:context="pl.kfrak.removal2app.MainActivity">
 
-    <android.support.design.widget.FloatingActionButton
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/main_activity_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_plus" />
+        android:src="@drawable/ic_plus" >
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_size="mini"
+            fab:fab_label="Item" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item_basement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_size="mini"
+            fab:fab_label="Basement" />
+
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

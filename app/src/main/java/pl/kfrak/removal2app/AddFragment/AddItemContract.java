@@ -17,6 +17,8 @@ public interface AddItemContract {
 
         interface View2 {
 
+            void closeDialog();
+
             String getItemName();
 
             String getItemDescription();

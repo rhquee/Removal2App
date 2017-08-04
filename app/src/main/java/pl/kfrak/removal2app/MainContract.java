@@ -8,9 +8,21 @@ public interface MainContract {
 
     interface Presenter {
         //w momencie kiedy kliknieta zostal dialog do otwoierania fragmentu
-        void onOpenDialogPressed();
+        void onOpenItemDialogPressed();
+
+        void onOpenBasementDialogPressed();
+
+        void notifyDialogClosed();
+
+        void onViewInitialized();
     }
     interface View3 {
-        void openAddDialog();
+        void openItemAddDialog();
+
+        void openBasementAddDialog();
+
+        void showList();
+
+        void refreshList();
     }
 }

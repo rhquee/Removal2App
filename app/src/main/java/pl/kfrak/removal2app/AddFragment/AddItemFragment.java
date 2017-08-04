@@ -1,5 +1,6 @@
 package pl.kfrak.removal2app.AddFragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -12,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import pl.kfrak.removal2app.AddDialogInterface;
 import pl.kfrak.removal2app.R;
 
 public class AddItemFragment extends DialogFragment implements AddItemContract.View2 {
@@ -21,6 +23,7 @@ public class AddItemFragment extends DialogFragment implements AddItemContract.V
     @BindView(R.id.add_fragment_item_description)
     EditText description;
 
+    private AddDialogInterface callback;
     private AddItemContract.Presenter AddItemPresenter;
     private Realm realm;
 
@@ -33,6 +36,12 @@ public class AddItemFragment extends DialogFragment implements AddItemContract.V
 
     public static AddItemFragment newInstance(){
         return new AddItemFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        callback = (AddDialogInterface) context;
     }
 
     @Override
@@ -54,9 +63,15 @@ public class AddItemFragment extends DialogFragment implements AddItemContract.V
 
         //cel: gdy user wpisze cos w pola + kliknie save, chcemy zapisac item do BD
         @OnClick(R.id.add_fragment_item_save)
-        public void onSaveButtonClicked () {
+        public void onSaveButtonClicked() {
             addItemPresenter.saveItem(realm);
+            callback.onDialogDismiss();
         }
+
+    @Override
+    public void closeDialog() {
+        this.dismiss();
+    }
 
     @Override
     public String getItemName() {
@@ -66,5 +81,11 @@ public class AddItemFragment extends DialogFragment implements AddItemContract.V
     @Override
     public String getItemDescription() {
         return description.getText().toString();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
     }
 }

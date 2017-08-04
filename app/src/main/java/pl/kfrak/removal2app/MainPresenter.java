@@ -15,8 +15,24 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void onOpenDialogPressed() {
+    public void onOpenItemDialogPressed() {
         //nie mozemy otworzyc tu widoku, musimy to wydelegowac do view
-        view.openAddDialog();
+        view.openItemAddDialog();
     }
+
+    @Override
+    public void onOpenBasementDialogPressed() {
+        view.openBasementAddDialog();
+    }
+
+    @Override
+    public void onViewInitialized() {
+        view.showList();
+    }
+
+    @Override
+    public void notifyDialogClosed() {
+        view.refreshList();
+    }
+
 }
